@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { Button, Modal, Input, Spin, Alert } from 'antd';
 import './page.css';
 
 const FirstPage = () => {
@@ -32,7 +33,7 @@ const FirstPage = () => {
           setGames(data);
         }
       } catch (error) {
-        alert('Oyunlar alınırken bir hata oluştu');
+        Alert.error('Oyunlar alınırken bir hata oluştu');
         console.error(error);
       } finally {
         setLoading(false);
@@ -53,10 +54,10 @@ const FirstPage = () => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newGame)
       });
-      alert('Oyun eklendi');
+      Alert.success('Oyun eklendi');
       setIsAddGameModalOpen(false);
     } catch (error) {
-      alert('Oyun eklenemedi');
+      Alert.error('Oyun eklenemedi');
       console.error(error);
     }
   };
@@ -68,10 +69,10 @@ const FirstPage = () => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newUser)
       });
-      alert("Kullanıcı eklendi");
+      Alert.success("Kullanıcı eklendi");
       setIsAddUserModalOpen(false);
     } catch (error) {
-      alert("Kullanıcı eklenemedi");
+      Alert.error("Kullanıcı eklenemedi");
       console.error(error);
     }
   };
@@ -83,15 +84,15 @@ const FirstPage = () => {
       </div>
 
       <div className="action-buttons">
-        <button onClick={() => setIsAddGameModalOpen(true)}>Add Game</button>
-        <button onClick={() => alert("Remove Game clicked")}>Remove Game</button>
-        <button onClick={() => setIsAddUserModalOpen(true)}>Add User</button>
-        <button onClick={() => alert("Remove User clicked")}>Remove User</button>
-        <button onClick={goToLoginPage}>Login as a User</button>
+        <Button type="primary" onClick={() => setIsAddGameModalOpen(true)}>Add Game</Button>
+        <Button danger onClick={() => Alert.info("Remove Game clicked")}>Remove Game</Button>
+        <Button type="primary" onClick={() => setIsAddUserModalOpen(true)}>Add User</Button>
+        <Button danger onClick={() => Alert.info("Remove User clicked")}>Remove User</Button>
+        <Button onClick={goToLoginPage}>Login as a User</Button>
       </div>
 
       {loading ? (
-        <div>Loading games...</div>
+        <Spin tip="Loading games..." />
       ) : (
         <div className="games-grid">
           {games.map((game) => (
@@ -107,47 +108,42 @@ const FirstPage = () => {
       )}
 
       {/* Add Game Modal */}
-      {isAddGameModalOpen && (
-        <div className="modal">
-          <div className="modal-content">
-            <h2>Add New Game</h2>
-            <input
-              placeholder="Name"
-              onChange={e => setNewGame({ ...newGame, name: e.target.value })}
-            />
-            <input
-              placeholder="Genre(s)"
-              onChange={e => setNewGame({ ...newGame, genre: e.target.value })}
-            />
-            <input
-              placeholder="Photo URL"
-              onChange={e => setNewGame({ ...newGame, photo: e.target.value })}
-            />
-            <button onClick={handleAddGame}>Add</button>
-            <button onClick={() => setIsAddGameModalOpen(false)}>Cancel</button>
-          </div>
-        </div>
-      )}
+      <Modal
+        title="Add New Game"
+        visible={isAddGameModalOpen}
+        onOk={handleAddGame}
+        onCancel={() => setIsAddGameModalOpen(false)}
+      >
+        <Input
+          placeholder="Name"
+          onChange={e => setNewGame({ ...newGame, name: e.target.value })}
+        />
+        <Input
+          placeholder="Genre(s)"
+          onChange={e => setNewGame({ ...newGame, genre: e.target.value })}
+        />
+        <Input
+          placeholder="Photo URL"
+          onChange={e => setNewGame({ ...newGame, photo: e.target.value })}
+        />
+      </Modal>
 
       {/* Add User Modal */}
-      {isAddUserModalOpen && (
-        <div className="modal">
-          <div className="modal-content">
-            <h2>Add New User</h2>
-            <input
-              placeholder="Name"
-              onChange={e => setNewUser({ ...newUser, name: e.target.value })}
-            />
-            <input
-              type="password"
-              placeholder="Password"
-              onChange={e => setNewUser({ ...newUser, password: e.target.value })}
-            />
-            <button onClick={handleAddUser}>Add</button>
-            <button onClick={() => setIsAddUserModalOpen(false)}>Cancel</button>
-          </div>
-        </div>
-      )}
+      <Modal
+        title="Add New User"
+        visible={isAddUserModalOpen}
+        onOk={handleAddUser}
+        onCancel={() => setIsAddUserModalOpen(false)}
+      >
+        <Input
+          placeholder="Name"
+          onChange={e => setNewUser({ ...newUser, name: e.target.value })}
+        />
+        <Input.Password
+          placeholder="Password"
+          onChange={e => setNewUser({ ...newUser, password: e.target.value })}
+        />
+      </Modal>
     </div>
   );
 };

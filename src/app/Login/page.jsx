@@ -1,30 +1,30 @@
+"use client"
+
 import React, {useState, useEffect} from "react";
 import {Form, Input, Button, Checkbox, Typography} from "antd";
-import {useAuth} from "./AuthContext";
-import {useNavigate} from "react-router-dom";
-import "../css/Login.css";
+import {useRouter} from "next/navigation"; // Replaced next/router with next/navigation
+import "./page.css";
 
 const {Title} = Typography;
 
 const Login = () => {
     const [loading, setLoading] = useState(false);
-    const {login, user} = useAuth();
-    const navigate = useNavigate();
+    const router = useRouter(); // Using Next.js router from next/navigation
 
     useEffect(() => {
-        if (user) {
-            navigate("/dashboard");
-        }
-    }, [user, navigate]);
+        // Removed user check
+    }, []); // Removed dependencies related to user
 
     const onFinish = async (values) => {
         setLoading(true);
         try {
-            const response = await login(values.username, values.password);
-            if (response) {
-                navigate("/home")
+            const response = await fetch('https://silent-space-458820-h2.oa.r.appspot.com/api/users/getAll');
+            const users = await response.json();
+            const user = users.find(u => u.username === values.username && u.password === values.password);
+            if (user) {
+                localStorage.setItem('user_id', user.id);
+                router.push("/home");
             } else {
-                navigate("/")
                 alert("Login failed. Please check your credentials.");
             }
         } catch (error) {
