@@ -25,7 +25,7 @@ const Login = () => {
             console.log(user);
             if (user) {
                 localStorage.setItem('user_id', user.id);
-                router.push("/home");
+                router.push("/user"); // Redirect to user page
             } else {
                 alert("Login failed. Please check your credentials.");
             }

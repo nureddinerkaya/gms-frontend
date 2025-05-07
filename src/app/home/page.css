@@ -16,6 +16,12 @@
   margin-bottom: 30px;
 }
 
+.action-buttons .ant-btn {
+  font-size: 16px; /* Yazı boyutunu büyütüyoruz */
+  padding: 10px 20px; /* Buton iç boşluklarını artırıyoruz */
+  height: auto; /* Yüksekliği içeriğe göre ayarlıyoruz */
+}
+
 /* Oyun kartları için düzenlemeleri yapıyoruz */
 .game-card {
   background: white;

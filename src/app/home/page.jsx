@@ -81,6 +81,7 @@ const FirstPage = () => {
       });
       window.alert('Oyun başarıyla eklendi!');
       setIsAddGameModalOpen(false);
+        window.location.reload();
     } catch (error) {
       window.alert('Oyun eklenemedi!');
       console.error(error);
@@ -106,6 +107,7 @@ const FirstPage = () => {
 
       window.alert("Kullanıcı eklendi");
       setIsAddUserModalOpen(false);
+        window.location.reload();
     } catch (error) {
       window.alert(`Kullanıcı eklenemedi: ${error.message}`);
       console.error(error);
@@ -126,6 +128,7 @@ const FirstPage = () => {
         window.alert("Oyun silindi.");
         setGames(prev => prev.filter(game => game.id !== selectedGameId));
         setIsRemoveGameModalOpen(false);
+          window.location.reload();
       } else {
         window.alert("Silme işlemi başarısız: " + message);
       }
@@ -136,27 +139,29 @@ const FirstPage = () => {
   };
 
   const handleRemoveUser = async () => {
-  if (!selectedUserId) return window.alert("Lütfen bir kullanıcı seçin.");
-  try {
-    const response = await fetch(`https://silent-space-458820-h2.oa.r.appspot.com/api/users/delete?id=${selectedUserId}`, {
-      method: 'DELETE',
-    });
+    if (!selectedUserId) return window.alert("Lütfen bir kullanıcı seçin.");
+    try {
+      const response = await fetch(`https://silent-space-458820-h2.oa.r.appspot.com/api/users/delete?id=${selectedUserId}`, {
+        method: 'DELETE',
+      });
 
-    const message = await response.text();
-    console.log("Backend Response:", message);
+      const message = await response.text();
+      console.log("Backend Response:", message);
 
-    if (message.includes("User deleted successfully")) {
-      window.alert("Kullanıcı silindi.");
-      setUsers(prev => prev.filter(user => user.id !== selectedUserId));
-      setIsRemoveUserModalOpen(false);
-    } else {
-      window.alert("Silme işlemi başarısız: " + message);
+      if (message.includes("User deleted successfully")) {
+        window.alert("Kullanıcı silindi.");
+        setUsers(prev => prev.filter(user => user.id !== selectedUserId));
+        setIsRemoveUserModalOpen(false);
+          window.location.reload();
+      } else {
+        window.alert("Silme işlemi başarısız: " + message);
+      }
+    } catch (error) {
+      window.alert("Kullanıcı silinemedi.");
+      console.error(error);
     }
-  } catch (error) {
-    window.alert("Kullanıcı silinemedi.");
-    console.error(error);
-  }
-};
+  };
+
   return (
     <div className="homepage-container">
       <div className="homepage-header">
@@ -168,7 +173,7 @@ const FirstPage = () => {
         <Button danger onClick={() => setIsRemoveGameModalOpen(true)}>Remove Game</Button>
         <Button type="primary" onClick={() => setIsAddUserModalOpen(true)}>Add User</Button>
         <Button danger onClick={() => setIsRemoveUserModalOpen(true)}>Remove User</Button>
-        <Button onClick={goToLoginPage}>Login as a User</Button>
+        <Button onClick={() => router.push('/login')}>Login as a User</Button>
       </div>
 
 
