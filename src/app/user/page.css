@@ -19,6 +19,20 @@
     font-size: 16px;
 }
 
+.user-info-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.user-info-buttons button {
+    margin-left: 10px;
+    padding: 10px 20px; /* Increased padding */
+    font-size: 16px; /* Increased font size */
+    border-radius: 5px; /* Added border radius for better appearance */
+    cursor: pointer;
+}
+
 .owned-list h2 {
     font-size: 20px;
     margin-bottom: 10px;

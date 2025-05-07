@@ -58,10 +58,11 @@
 }
 
 .default-button {
-  padding: 8px 16px;
+  padding: 12px 24px; /* Increased padding */
+  font-size: 16px; /* Increased font size */
+  border-radius: 6px; /* Added border radius for better appearance */
   background-color: #f0f0f0;
   border: 1px solid #d9d9d9;
-  border-radius: 4px;
   cursor: pointer;
 }
 

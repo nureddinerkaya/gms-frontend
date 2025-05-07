@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation'; // Import useRouter for navigation
 import './page.css';
 
 const UserPage = () => {
@@ -8,6 +9,7 @@ const UserPage = () => {
     const [owneds, setOwneds] = useState([]);
     const [averageRating, setAverageRating] = useState(null); // New state for average rating
     const [gameNames, setGameNames] = useState({}); // New state for game names
+    const router = useRouter(); // Initialize router
 
     useEffect(() => {
         const userId = localStorage.getItem('user_id'); // Get user ID from local storage
@@ -123,7 +125,13 @@ const UserPage = () => {
     return (
         <div className="user-page">
             <div className="user-info">
-                <h1>{user.username}</h1>
+                <div className="user-info-header">
+                    <h1>{user.username}</h1>
+                    <div className="user-info-buttons">
+                        <button onClick={() => router.push('/home')}>Home</button>
+                        <button onClick={() => router.push('/game')}>Look Games</button>
+                    </div>
+                </div>
                 <p>Total Play Time: {user.total_played_time} hours</p>
                 <p>Most Played Game: {user.most_played_game || 'N/A'}</p>
                 <p>Average of Ratings: {averageRating}</p> {/* Display average rating */}
