@@ -1,0 +1,48 @@
+html, body {
+    height: 100%;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+}
+
+.container {
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    width: 100%;
+    min-width: 500px;
+    margin: 20px;
+}
+
+.title {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.register-link {
+    color: #4285f4;
+    text-align: center;
+    margin-top: 15px;
+}
+
+.register-button {
+    background-color: #4285f4;
+    border-color: #4285f4;
+}
+
+.ant-message {
+    position: fixed !important;
+    top: 20px !important; /* Üst kısma yakın konum */
+    right: 20px !important; /* Sağda görünür */
+    z-index: 9999 !important; /* Yüksek z-index */
+}
