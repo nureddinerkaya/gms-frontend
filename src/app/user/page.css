@@ -1,0 +1,66 @@
+.user-page {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+}
+
+.user-info {
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;
+}
+
+.user-info h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.user-info p {
+    margin: 5px 0;
+    font-size: 16px;
+}
+
+.user-info-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.user-info-buttons button {
+    margin-left: 10px;
+    padding: 10px 20px; /* Increased padding */
+    font-size: 16px; /* Increased font size */
+    border-radius: 5px; /* Added border radius for better appearance */
+    cursor: pointer;
+}
+
+.owned-list h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.owned-list ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.owned-list li {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.comments h3 {
+    margin: 10px 0 5px;
+    font-size: 16px;
+}
+
+.comments ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.comments li {
+    font-size: 14px;
+    margin-bottom: 5px;
+}
