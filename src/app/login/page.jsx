@@ -20,7 +20,9 @@ const Login = () => {
         try {
             const response = await fetch('https://silent-space-458820-h2.oa.r.appspot.com/api/users/getAll');
             const users = await response.json();
+
             const user = users.find(u => u.username === values.username && u.password === values.password);
+            console.log(user);
             if (user) {
                 localStorage.setItem('user_id', user.id);
                 router.push("/home");
