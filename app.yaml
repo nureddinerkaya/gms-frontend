@@ -1,0 +1,11 @@
+runtime: nodejs22  # Next.js için uygun Node.js runtime
+
+instance_class: F2  # Daha güçlü bir instance gerekiyorsa bunu ayarlayabilirsiniz
+
+env_variables:
+  NODE_ENV: production  # Next.js için production ortamı
+
+handlers:
+  # Tüm istekleri Next.js'in server.js dosyasına yönlendirin
+  - url: /.*
+    script: auto

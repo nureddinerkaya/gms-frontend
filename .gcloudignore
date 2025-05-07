@@ -1,0 +1,7 @@
+# Gcloud tarafından otomatik oluşturulan dosyalar
+.gcloudignore
+.git
+.gitignore
+node_modules/
+npm-debug.log
+.DS_Store
