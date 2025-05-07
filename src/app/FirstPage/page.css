@@ -1,0 +1,70 @@
+/* Homepage container'ına overflow özelliği ekliyoruz */
+.homepage-container {
+  padding: 20px;
+  height: 100vh; /* Sayfa yüksekliğini viewport ile sınırlıyoruz */
+  overflow-y: auto; /* Sayfa içeriği taşarsa kaydırma çubuğu ekler */
+  display: flex;
+  flex-direction: column;
+}
+
+/* action-buttons kısmına üstten ve alttan padding ekleyelim */
+.action-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+/* Oyun kartları için düzenlemeleri yapıyoruz */
+.game-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+  padding: 15px;
+  text-align: center;
+  transition: transform 0.2s;
+  margin-bottom: 20px;
+  overflow: hidden; /* Kartların taşmaması için */
+  height: 380px; /* Kartın sabit yüksekliğini ayarlıyoruz */
+}
+
+.game-card:hover {
+  transform: scale(1.03);
+}
+
+.game-image {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 10px; /* Görüntü ile metin arasına boşluk ekliyoruz */
+}
+
+.game-name {
+  font-weight: bold;
+  margin: 10px 0 5px;
+  font-size: 18px;
+}
+
+.game-genres, .game-playtime, .game-rating {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 5px;
+}
+
+/* Oyun ekleme butonunun görünürlüğünü iyileştirelim */
+.game-add-button {
+  margin-top: 15px;
+}
+
+/* Modal için stiller */
+.ant-modal-footer {
+  display: flex;
+  justify-content: center;
+}
+
+.ant-btn-primary {
+  background-color: #1890ff;
+  border-color: #1890ff;
+}
