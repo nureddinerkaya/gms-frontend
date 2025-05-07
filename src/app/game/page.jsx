@@ -36,10 +36,12 @@ const HomePage = () => {
           alert(`Hata: ${responseData.message || 'Bilinmeyen bir hata oluştu.'}`);
         } else {
           alert('Başarıyla oyunu kütüphanenize eklediniz.');
+          router.push('/user')
         }
       } else {
         const responseText = await response.text();
         alert(`Oyunu başarıyla kütüphanenize eklediniz.`);
+        router.push('/user')
       }
       
     } catch (error) {
@@ -53,7 +55,7 @@ const HomePage = () => {
       try {
         const response = await fetch('https://silent-space-458820-h2.oa.r.appspot.com/api/games/getAll');
         const data = await response.json();
-        console.log(data);
+        console.log('Fetched games:', data); // Debug: Log the API response
         if (data) {
           setGames(data); // Save the data to state
         }
@@ -84,8 +86,7 @@ const HomePage = () => {
               <div className="game-name">{game.name}</div>
               <div className="game-genres">Genre: {game.genre}</div>
               <div className="game-playtime">Playtime: {game.playTimeOfGame} hours</div>
-              <div className="game-rating">Rating: {game.totalRating}</div>
-              <div style={{ marginBottom: '10px' }}></div>
+              <div className="game-rating">Rating: {Math.round(game.TotalRating)}</div>
               <button
                 className="primary-button game-own-button"
                 onClick={() => handleAddGame(game.id)} // Trigger action on button click
