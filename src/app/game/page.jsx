@@ -13,6 +13,41 @@ const HomePage = () => {
     router.push('/');
   };
 
+  const handleAddGame = async (gameId) => {
+    const userId = localStorage.getItem('user_id'); // Get userId from local storage
+    if (!userId) {
+      alert('Kullanıcı ID bulunamadı.');
+      return;
+    }
+
+    try {
+      const response = await fetch('https://silent-space-458820-h2.oa.r.appspot.com/api/owneds/add', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ userId, gameId }),
+      });
+
+      const contentType = response.headers.get('Content-Type');
+      if (contentType && contentType.includes('application/json')) {
+        const responseData = await response.json();
+        if (responseData.status === "error") {
+          alert(`Hata: ${responseData.message || 'Bilinmeyen bir hata oluştu.'}`);
+        } else {
+          alert('Başarıyla oyunu kütüphanenize eklediniz.');
+        }
+      } else {
+        const responseText = await response.text();
+        alert(`Oyunu başarıyla kütüphanenize eklediniz.`);
+      }
+      
+    } catch (error) {
+      console.error('Oyun ekleme hatası:', error);
+      alert('Oyun eklenirken bir hata oluştu.');
+    }
+  };
+
   useEffect(() => {
     const fetchGames = async () => {
       try {
@@ -35,12 +70,10 @@ const HomePage = () => {
 
   return (
     <div className="homepage-container">
-      
-
-      <div className="action-buttons">
-        <button className="primary-button">Test Button</button>
+      <div className="top-buttons">
+        <button className="default-button" onClick={() => router.push('/home')}>Home Page</button>
+        <button className="default-button" onClick={() => router.push('/user')}>User Page</button>
       </div>
-
       {loading ? (
         <div>Loading games...</div>
       ) : (
@@ -52,15 +85,17 @@ const HomePage = () => {
               <div className="game-genres">Genre: {game.genre}</div>
               <div className="game-playtime">Playtime: {game.playTimeOfGame} hours</div>
               <div className="game-rating">Rating: {game.totalRating}</div>
-              <button className="primary-button game-add-button">Ekle</button>
+              <div style={{ marginBottom: '10px' }}></div>
+              <button
+                className="primary-button game-own-button"
+                onClick={() => handleAddGame(game.id)} // Trigger action on button click
+              >
+                Ekle
+              </button>
             </div>
           ))}
         </div>
       )}
-
-      <div className="add-button-wrapper">
-        <button className="dashed-button large-button">+ Oyun Ekle</button>
-      </div>
     </div>
   );
 };
